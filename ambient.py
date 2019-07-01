@@ -44,13 +44,13 @@ class Ambient:
                         __o.append('skip=' + str(args['skip']))
         if len(__o) > 0:
             url = url + '?' + '&'.join(__o)
-        self.r = self.requests.get(url)
+        self.r = self.requests.get(url,timeout=(3.0, 5.0))
         return list(reversed(self.r.json()))
 
     def getprop(self):
         url = 'http://ambidata.io/api/v2/channels/' + str(self.channelId)
         if hasattr(self, 'readKey'):
             url = url + '?' + 'readKey=' + self.readKey
-        self.r = self.requests.get(url)
+        self.r = self.requests.get(url, timeout=(3.0, 5.0))
         self.prop = self.r.json()
         return self.prop
